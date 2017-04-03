@@ -10,7 +10,9 @@ from matplotlib import pylab as plt
 train=pd.read_csv('train.csv')
 test=pd.read_csv('test.csv')
 
+#store test ids for writing in output file
 memid=test['ID']
+
 #separate and drop outcome variables from train
 outcome=train['Outcome']
 train_drop_fea=['Outcome']
@@ -52,6 +54,7 @@ dtrain = xgb.DMatrix(np.array(x_train), label=y_train)
 dval=xgb.DMatrix(np.array(x_val),label=y_val)
 dtest = xgb.DMatrix(np.array(test))
 
+# classification
 xgb_params = {
     'seed': 7,
     # 'colsample_bytree': 0.7,
