@@ -29,16 +29,6 @@ train_test['minus']=train_test.Three_Day_Moving_Average - train_test.Five_Day_Mo
 train_test['minus2']=train_test.Ten_Day_Moving_Average - train_test.Five_Day_Moving_Average
 train_test['dirminus']=train_test.Positive_Directional_Movement- train_test.Negative_Directional_Movement
 
-# code for creating diff feature, i.e. difference between three day moving average 
-# of nth and n-1th day. Uncommment if you want to try this. 
-
-# train_test.sort(['Stock_ID', 'timestamp'], inplace=True)
-# train_test['diffs'] = train_test.Three_Day_Moving_Average.diff()
-# mask = train_test.Stock_ID != train_test.Stock_ID.shift(1)
-# train_test['diffs'][mask] = np.nan
-# train_test.sort(['timestamp','Stock_ID'], inplace=True)
-# train_test.fillna(0,inplace=True)
-
 #drop redundant features
 drop_fea=['ID','timestamp','Twenty_Day_Moving_Average','Ten_Day_Moving_Average','Five_Day_Moving_Average',
 'Three_Day_Moving_Average','Volume']
