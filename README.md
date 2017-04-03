@@ -29,5 +29,5 @@ I set up the early stopping parameter to 50, i.e. if the eval score doesnt impro
 Well, thats it, I did not have the time to try ensemble models which I believe could have improved the score further. 
 
 # Running the code 
-Keep all the files(python script, train.csv and test.csv) in the same directory and set the working directory to that directory. Run the script by command: python try1.py. The submission is saved as submission_xgb.csv. The link to the git repo is 
+Keep all the files(python script, train.csv and test.csv) in the same directory and set the working directory to that directory. Run the script by command: python try1.py. The submission is saved as submission_xgb.csv.
 
