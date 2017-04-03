@@ -1,37 +1,33 @@
-## Welcome to GitHub Pages
+# Approach 
 
-You can use the [editor on GitHub](https://github.com/akashgupta222/av_datahulk/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Initialization
+I started out by trying a basic xgboost model using the given features and filling the missing values with -1. I generally start with xgboost because of its speed and good scores. I had removed the ID and timestamp featuers. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Cross Validation
+To set up a quick cross validation, I randomly sampled out 10% of the dataset and set that up as the eval data. I had planned to write for timestamp based partitioning later. But the initial eval scores for this setup were similar to the ones I got on the public leaderboard, so I persisted with this setup.  
 
-### Markdown
+## Feature Engineering
+On plotting the feature importances using the default set of features, I realized that the MA features were not contributing much. Also, to me using the absolute values of these features was not intutive. Removing these gave me an improvement in the eval score as well as the public leaderboard score. Then I removed the volume traded feature because it was also having a low contribution and removing it gave me an improvement in both eval and public lb. Later, i created 3 new features:
+- difference between three day moving average and five day moving average 
+- difference between five day moving average and ten day moving average 
+- difference between positive directional movemeent and negative directional movement
+I added these features one by one and saw an improvement in both the eval and public lb scores. 
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+I tried creating a feature for differnce between three day moving average of nth day minus the three day moving average of (n-1)th day. This gave me improvement in eval dataset, but not on the public lb. Possibily this had overfit the data, so I removed this feature. 
 
-```markdown
-Syntax highlighted code block
+## Parameter Tuning 
 
-# Header 1
-## Header 2
-### Header 3
+### max depth
+I usually start with shallow trees (max depth 3). I prefer to use shallow trees because they dont tend to overfit. I tried increasing the max depth to 4 and 5, but that made the scores worse for public lb. So I stuck to using max depth 3. 
 
-- Bulleted
-- List
+### min_child_weight
+Initially, I set the min_child_weight to 1000 because of the high number of data points. Later I moved it to 1500 and 500 and saw that 500 gave me a better score. Decreasing further to 300 didnt help so I stuck with 500. 
 
-1. Numbered
-2. List
+### Learning Rate, num_rounds and early stopping
+I set up the early stopping parameter to 50, i.e. if the eval score doesnt improve in 50 rounds, stop training further. The learning rate was initially set to 0.05 and num rounds were initially set to 1500. But this was very slow and the score was improving even after 1500 rounds. So I changed the learning rate to 0.2 and reduced the num rounds to 800. This gave me stopping near the 600th round and quicker training as a result. 
 
-**Bold** and _Italic_ and `Code` text
+Well, thats it, I did not have the time to try ensemble models which I believe could have improved the score further. 
 
-[Link](url) and ![Image](src)
-```
+# Running the code 
+Keep all the files(python script, train.csv and test.csv) in the same directory and set the working directory to that directory. Run the script by command: python try1.py. The submission is saved as submission_xgb.csv. The link to the git repo is 
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/akashgupta222/av_datahulk/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
