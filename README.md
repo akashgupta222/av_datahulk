@@ -29,5 +29,21 @@ I set up the early stopping parameter to 50, i.e. if the eval score doesnt impro
 Well, thats it, I did not have the time to try ensemble models which I believe could have improved the score further. 
 
 # Running the code 
-Keep all the files(python script, train.csv and test.csv) in the same directory and set the working directory to that directory. Run the script by command: python try1.py. The submission is saved as submission_xgb.csv.
+1. Keep all the files(python script, train.csv and test.csv) in the same directory and set the working directory to that directory. 
+2. Run the script by command: python try1.py. 
+3. The submission is saved as submission_xgb.csv.
+
+## Packages Used
+1. scikit-learn 0.17.1 http://scikit-learn.org/stable/
+   <br> sudo pip install scikit-learn
+2. pandas 0.18.1 http://pandas.pydata.org/ <br> sudo pip install pandas
+3. numpy 1.11.1 http://www.numpy.org/ <br> sudo pip install numpy
+4. xgboost 0.6 https://github.com/dmlc/xgboost/tree/master/python-package 
+5. keras 1.0.8 https://keras.io/#installation <br> sudo pip install keras
+
+## Dependencies for packages 
+1. scipy 0.18.0 https://www.scipy.org/ <br> sudo pip install scipy
+2. Theano 0.8.2 http://deeplearning.net/software/theano/install.html#install <br> sudo pip install Theano
+3. pyyaml 3.11 https://pypi.python.org/pypi/PyYAML/3.12 <br> sudo pip install pyyaml
+4. gcc 4.8.4 <br> sudo apt-get install build-essential
 
