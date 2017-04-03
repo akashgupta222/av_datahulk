@@ -11,6 +11,7 @@ On plotting the feature importances using the default set of features, I realize
 - difference between three day moving average and five day moving average 
 - difference between five day moving average and ten day moving average 
 - difference between positive directional movemeent and negative directional movement
+
 I added these features one by one and saw an improvement in both the eval and public lb scores. 
 
 I tried creating a feature for differnce between three day moving average of nth day minus the three day moving average of (n-1)th day. This gave me improvement in eval dataset, but not on the public lb. Possibily this had overfit the data, so I removed this feature. 
